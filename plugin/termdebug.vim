@@ -653,15 +653,15 @@ func s:InstallCommands()
   command Source call s:GotoSourcewinOrCreateIt()
   command Winbar call s:InstallWinbar()
 
-  nmap <silent> e :Evaluate<CR>
-  nmap <silent> ,b :Break<CR>
-  nmap <silent> ,B :Clear<CR>
-  nmap <silent> d :call TermDebugSendCommand('delete')<CR>
-  nmap <silent> s :Step<CR>
-  nmap <silent> i :Next<CR>
-  nmap <silent> ,f :Finish<CR>
-  nmap <silent> c :Continue<CR>
-  nmap <silent> r :Run<CR>
+  nnoremap <silent> e :Evaluate<CR>
+  nnoremap <silent> ,b :Break<CR>
+  nnoremap <silent> ,B :Clear<CR>
+  nnoremap <silent> d :call TermDebugSendCommand('delete')<CR>
+  nnoremap <silent> s :Step<CR>
+  nnoremap <silent> i :Over<CR>
+  nnoremap <silent> ,f :Finish<CR>
+  nnoremap <silent> c :Continue<CR>
+  nnoremap <silent> r :Run<CR>
 
   let &cpo = save_cpo
 endfunc
