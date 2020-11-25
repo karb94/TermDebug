@@ -631,15 +631,12 @@ func s:InstallCommands()
   let save_cpo = &cpo
   set cpo&vim
 
-  nmap ,b :call s:SetBreakpoint()<CR>
-  nmap ,B :call s:ClearBreakpoint()<CR>
-  nmap d :call s:SendCommand('delete')<CR>
-  nmap s :call s:SendCommand('-exec-step')<CR>
-  nmap i :call s:SendCommand('-exec-next')<CR>
-  nmap ,f :call s:SendCommand('-exec-finish')<CR>
-  nmap c :call s:SendCommand('continue')<CR>
+  command Break call s:SetBreakpoint()
+  command Clear call s:ClearBreakpoint()
+  command Step call s:SendCommand('-exec-step')
+  command Over call s:SendCommand('-exec-next')
+  command Finish call s:SendCommand('-exec-finish')
   command -nargs=* Run call s:Run(<q-args>)
-  nmap r :Run<CR>
   command -nargs=* Arguments call s:SendCommand('-exec-arguments ' . <q-args>)
   command Stop call s:SendCommand('-exec-interrupt')
 
@@ -655,7 +652,16 @@ func s:InstallCommands()
   command Program call win_gotoid(s:ptywin)
   command Source call s:GotoSourcewinOrCreateIt()
   command Winbar call s:InstallWinbar()
+
   nmap e :Evaluate<CR>
+  nmap ,b :Break<CR>
+  nmap ,B :Clear<CR>
+  nmap d :call TermDebugSendCommand('delete')<CR>
+  nmap s :Step<CR>
+  nmap i :Next<CR>
+  nmap ,f :Finish<CR>
+  nmap c :Continue<CR>
+  nmap r :Run<CR>
 
   let &cpo = save_cpo
 endfunc
@@ -686,6 +692,11 @@ func s:DeleteCommands()
   nunmap ,f
   nunmap r
   nunmap q
+  
+  delcommand Break
+  delcommand Clear
+  delcommand Step
+  delcommand Over
   delcommand Finish
   delcommand Run
   delcommand Arguments
