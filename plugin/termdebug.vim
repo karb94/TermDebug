@@ -649,19 +649,20 @@ call win_gotoid(curwinid)
 
     command -range -nargs=* Evaluate call s:Evaluate(<range>, <q-args>)
     command Gdb call win_gotoid(s:gdbwin)
-command Program call win_gotoid(s:ptywin)
+    command Program call win_gotoid(s:ptywin)
     command Source call s:GotoSourcewinOrCreateIt()
     command Winbar call s:InstallWinbar()
 
-  nnoremap <silent> e :Evaluate<CR>
-  nnoremap <silent> ,b :Break<CR>
-  nnoremap <silent> ,B :Clear<CR>
-  nnoremap <silent> d :call TermDebugSendCommand('delete')<CR>
-  nnoremap <silent> s :Step<CR>
-  nnoremap <silent> i :Over<CR>
-  nnoremap <silent> ,f :Finish<CR>
-  nnoremap <silent> c :Continue<CR>
-  nnoremap <silent> r :Run<CR>
+    nnoremap <silent> e :Evaluate<CR>
+    nnoremap <silent> ,b :Break<CR>
+    nnoremap <silent> ,B :Clear<CR>
+    nnoremap <silent> d :call TermDebugSendCommand('delete')<CR>
+    nnoremap <silent> s :Step<CR>
+    nnoremap <silent> i :Over<CR>
+    nnoremap <silent> ,f :Finish<CR>
+    nnoremap <silent> c :Continue<CR>
+    nnoremap <silent> r :Run<CR>
+    nnoremap <silent> q :call TermDebugSendCommand('quit')<CR>
 
     let &cpo = save_cpo
     endfunc
@@ -683,13 +684,14 @@ command Program call win_gotoid(s:ptywin)
 
     " Delete installed debugger commands in the current window.
     func s:DeleteCommands()
+        nunmap e
         nunmap ,b
         nunmap ,B
         nunmap d
         nunmap s
         nunmap i
-        nunmap c
         nunmap ,f
+        nunmap c
         nunmap r
         nunmap q
 
