@@ -631,13 +631,13 @@ func s:InstallCommands()
   let save_cpo = &cpo
   set cpo&vim
 
-  nmap ,b call s:SetBreakpoint()
-  nmap ,B call s:ClearBreakpoint()
-  nmap d call s:SendCommand('delete')
-  nmap s call s:SendCommand('-exec-step')
-  nmap i call s:SendCommand('-exec-next')
-  nmap ,f call s:SendCommand('-exec-finish')
-  nmap c call s:SendCommand('continue')
+  nmap ,b :call s:SetBreakpoint()<CR>
+  nmap ,B :call s:ClearBreakpoint()<CR>
+  nmap d :call s:SendCommand('delete')<CR>
+  nmap s :call s:SendCommand('-exec-step')<CR>
+  nmap i :call s:SendCommand('-exec-next')<CR>
+  nmap ,f :call s:SendCommand('-exec-finish')<CR>
+  nmap c :call s:SendCommand('continue')<CR>
   command -nargs=* Run call s:Run(<q-args>)
   nmap r :Run<CR>
   command -nargs=* Arguments call s:SendCommand('-exec-arguments ' . <q-args>)
