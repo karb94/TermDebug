@@ -635,9 +635,11 @@ func s:InstallCommands()
   nmap ,B call s:ClearBreakpoint()
   nmap d call s:SendCommand('delete')
   nmap s call s:SendCommand('-exec-step')
-  nmap <CR> call s:SendCommand('-exec-next')
-  nmap Finish call s:SendCommand('-exec-finish')
+  nmap i call s:SendCommand('-exec-next')
+  nmap ,f call s:SendCommand('-exec-finish')
+  nmap c call s:SendCommand('continue')
   command -nargs=* Run call s:Run(<q-args>)
+  nmap r :Run<CR>
   command -nargs=* Arguments call s:SendCommand('-exec-arguments ' . <q-args>)
   command Stop call s:SendCommand('-exec-interrupt')
 
@@ -675,10 +677,15 @@ endfunc
 
 " Delete installed debugger commands in the current window.
 func s:DeleteCommands()
-  delcommand Break
-  delcommand Clear
-  delcommand Step
-  delcommand Over
+  nunmap ,b
+  nunmap ,B
+  nunmap d
+  nunmap s
+  nunmap i
+  nunmap c
+  nunmap ,f
+  nunmap r
+  nunmap q
   delcommand Finish
   delcommand Run
   delcommand Arguments
